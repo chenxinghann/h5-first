@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面换肤</title>
+    <style>
+       li{
+           float: left;
+           list-style-type: none;
+           padding-right: 10px;
+       }
+       .box{
+           width: 15px;
+           height: 20px;
+       }
+    </style>
+</head>
+<body>
+    <fieldset style="border: 1px grey solid;">
+        <legend style="color: red;font-size: 20px;">网页换肤</legend>
+        <div style="border: 1px grey solid;padding-top: 20px;height: 150px;width:600px;">
+            <li><div class="box" id="grey" style="margin-top: 15px;background-color: grey;margin-left: 15px;"></div></li>
+            <li><div class="box" id="purple" style="margin-top: 15px;background-color: purple;"></div></li>
+            <li><div class="box" id="pink" style="margin-top: 15px;background-color: pink;"></div></li>
+            <li><div class="box" id="blue" style="margin-top: 15px;background-color: blue;"></div></li>
+            <li><div class="box" id="yellow" style="margin-top: 15px;background-color: yellow;"></div></li>
+            <li><div class="box" id="green" style="margin-top: 15px;background-color: green;"></div></li>
+            <div id="page" style="background-color: grey;margin-top: 60px;height: 60px;width: 500px;margin-left: 50px;">
+                LocalStorage将数据保存在客户端本地的硬件设备中，即使浏览器被关闭了，该数据依然存在，下次打开浏览器访问网站时仍然可以继续使用。
+            </div>
+        </div>
+    </fieldset>
+</body>
+<script>
+    var page=document.getElementById("page");
+    var box=document.getElementsByClassName("box");
+    var page=document.getElementById("page");
+    var grey=document.getElementById("grey");
+    var i=0; 
+    var color = grey;
+    for (i = 0; i < 6; i++) {
+        box[i].onclick = function() {
+            for (var a = 0; a < 6 && a != i; a++) {
+                box[a].style.marginTop =15+"px";
+            }
+            this.style.marginTop =5+"px";
+            color = this.style.backgroundColor;
+            page.style.backgroundColor=color;
+            localStorage.setItem("bgc",color);
+        }
+    }
+
+    window.onload=function(){
+        if(localStorage.length==0){
+            grey.style.marginTop=5+"px";
+            page.style.backgroundColor="grey";
+        }
+        else{
+            page.style.backgroundColor=localStorage.getItem("bgc");
+            var lastColor=document.getElementById(localStorage.getItem("bgc"));
+            lastColor.style.marginTop=5+"px";
+        }
+
+        
+    }
+</script>
+</html>
